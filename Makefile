@@ -21,7 +21,7 @@ all:	init-fs exec-fs fork-fs test-fs
 
 .PHONY: fork-fs exec-fs init-fs test-fs clean
 
-fork-fs:	forkmess forkwait fork.cpio.gz
+fork-fs:	forkmess forkwait forkexec child fork.cpio.gz
 
 exec-fs:	exec child exec.cpio.gz
 

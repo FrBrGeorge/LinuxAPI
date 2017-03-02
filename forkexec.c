@@ -15,7 +15,6 @@ int main() {
   }
   else
     printf("\t*** I'm a child\n");
-    sleep(3);
-    printf("\t*** I'm done\n");
+    execl("child", "child", "I am a child",  NULL);
   return 0;
 }

@@ -1,2 +1,4 @@
 ./forkmess
 ./forkwait
+./forkexec
+./child
