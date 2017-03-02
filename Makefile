@@ -19,7 +19,9 @@ run:	all
 
 all:	init-fs exec-fs fork-fs test-fs
 
-fork-fs:	forkmess fork.cpio.gz
+.PHONY: fork-fs exec-fs init-fs test-fs clean
+
+fork-fs:	forkmess forkwait fork.cpio.gz
 
 exec-fs:	exec child exec.cpio.gz
 
