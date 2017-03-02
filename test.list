@@ -1,6 +1,8 @@
-./init
 bash
 ash
 ls
 awk
 ed
+date
+cal
+sed

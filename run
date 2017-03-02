@@ -1,0 +1,12 @@
+#!/bin/sh
+INIT="${1%%.cpio.gz}"
+shift
+INITRD="$INIT".cpio.gz
+test -z "$1" || INIT="$1"
+shift
+CMD="qemu -nographic -kernel vmlinuz -initrd $INITRD -append 'console=ttyS0${INIT:+ rdinit=$INIT}' $@"
+
+echo "$CMD"
+echo -n "Start? "
+read
+eval $CMD

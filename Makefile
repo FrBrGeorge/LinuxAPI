@@ -7,11 +7,26 @@ LDFLAGS=-static
 
 %.cpio.gz:	%.root
 	( cd $<; find .| cpio -o -H newc ) | gzip > $@
+	rm -rf $<
 
-all:	init test.cpio.gz
+run:	all
+	@echo
+	@echo "	Images:"
+	@ls -m *.gz
+	@echo "	Use:"
+	@echo "./run image_name [init_binary]"
+	@echo
 
-init:	init.c
+all:	init-fs exec-fs fork-fs test-fs
+
+fork-fs:	forkmess fork.cpio.gz
+
+exec-fs:	exec child exec.cpio.gz
+
+init-fs:	init init.cpio.gz
+
+test-fs:	test.cpio.gz
 
 clean:
 	rm -rf *.root
-	rm -f *.gz init *.tmp
+	rm -f *.gz *.tmp $(patsubst %.c,%,$(wildcard *.c))
