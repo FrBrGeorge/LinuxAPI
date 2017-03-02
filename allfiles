@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while read F; do
+  case "$F" in
+    */*) FF="$F" ;;
+    *) FF="`/usr/bin/which "$F" 2>/dev/null`";;
+  esac
+  echo "$FF"
+  ldd "$FF" 2> /dev/null | sed -En 's@.*[[:space:]](/.*) .*@\1@p'
+done < ${1:?Usage: allfiles files.list} | sort -u
