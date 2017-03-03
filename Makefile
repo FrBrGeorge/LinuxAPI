@@ -19,6 +19,9 @@ run:	all
 
 all:	init-fs exec-fs fork-fs test-fs
 
+list:
+	for F in *.cpio.gz; do echo "	### $$F"; zcat < $$F | cpio -itv; done
+
 .PHONY: fork-fs exec-fs init-fs test-fs clean
 
 fork-fs:	forkmess forkwait forkexec child fork.cpio.gz
