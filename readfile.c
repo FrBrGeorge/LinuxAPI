@@ -28,9 +28,13 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	while (read(fd, &c, 1) > 0) /* if read reaches end of file it returns 0 */
-		printf("%i: %c\n", getpid(), c);
+	while (read(fd, &c, 1) > 0)/* if read reaches end of file it returns 0 */
+	{
+		printf("%i: %c\n", pid, c);
+		usleep(1);
+	}
 
 	close(fd);
+	if(!pid) pause();
 	return 0;
 }
