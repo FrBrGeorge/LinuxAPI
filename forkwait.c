@@ -13,9 +13,10 @@ int main() {
     printf("\t*** Child exited with status %d\n", wstatus);
     pause();
   }
-  else
+  else {
     printf("\t*** I'm a child\n");
     sleep(3);
     printf("\t*** I'm done\n");
+  }
   return 0;
 }

@@ -17,7 +17,7 @@ run:	all
 	@echo "./run image_name [init_binary]"
 	@echo
 
-all:	init-fs exec-fs fork-fs test-fs
+all:	init-fs exec-fs fork-fs test-fs readfile-fs
 
 list:
 	for F in *.cpio.gz; do echo "	### $$F"; zcat < $$F | cpio -itv; done
@@ -31,6 +31,8 @@ exec-fs:	exec child exec.cpio.gz
 init-fs:	init init.cpio.gz
 
 test-fs:	test.cpio.gz
+
+readfile-fs:	readfile readfile.cpio.gz
 
 clean:
 	rm -rf *.root
