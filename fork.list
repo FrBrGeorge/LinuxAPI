@@ -1,4 +1,6 @@
 ./forkmess
 ./forkwait
 ./forkexec
+./forkenv
 ./child
+./childe
