@@ -1,0 +1,3 @@
+#!/bin/sh
+
+{ test -f "$1" && zcat < "$1" || zcat < "$1.cpio.gz"; } | cpio -itv ${2:+*$2*}

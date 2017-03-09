@@ -20,7 +20,7 @@ run:	all
 all:	init-fs exec-fs fork-fs test-fs readfile-fs
 
 list:
-	for F in *.cpio.gz; do echo "	### $$F"; zcat < $$F | cpio -itv; done
+	for F in *.cpio.gz; do echo "	$$F:"; ./show $$F; done
 
 .PHONY: fork-fs exec-fs init-fs test-fs clean
 
