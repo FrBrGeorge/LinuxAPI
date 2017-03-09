@@ -9,14 +9,11 @@ int main() {
 
   p = fork();
   if(p) {
-    setenv("a", "export", 1);
     wait(&wstatus);
     printf("\t*** Child exited with status %d\n", wstatus);
     pause();
   }
   else {
-    sleep(1);
-    printf("%s\n", getenv("a"));
     printf("\t*** I'm a child\n");
     execl("child", "child", "I am a child",  NULL);
   }
