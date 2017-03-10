@@ -9,7 +9,10 @@ LDFLAGS=-static
 	( cd $<; find .| cpio -o -H newc ) | gzip > $@
 	rm -rf $<
 
-run:	all
+shell:
+	echo todo
+
+forkexec:	forkexec-all
 	@echo
 	@echo "	Images:"
 	@ls -m *.gz
@@ -17,7 +20,7 @@ run:	all
 	@echo "./run image_name [init_binary]"
 	@echo
 
-all:	init-fs exec-fs fork-fs test-fs readfile-fs
+forkexec-all:	init-fs exec-fs fork-fs test-fs readfile-fs
 
 list:
 	for F in *.cpio.gz; do echo "	$$F:"; ./show $$F; done
