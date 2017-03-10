@@ -9,8 +9,9 @@ LDFLAGS=-static
 	( cd $<; find .| cpio -o -H newc ) | gzip > $@
 	rm -rf $<
 
-shell:
-	echo todo
+shell:	shell.cpio.gz
+	@./show shell
+	@echo "./run shell <whatever>"
 
 forkexec:	forkexec-all
 	@echo
