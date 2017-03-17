@@ -1,0 +1,9 @@
+#!/bin/bash
+
+case "$1" in
+  *a*) echo a ;;
+  bb*) echo b ;;
+  c) echo c ;;
+  *) echo any ;;
+esac
+

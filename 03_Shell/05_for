@@ -1,0 +1,33 @@
+#!/bin/bash
+
+for i in aa bb ccc
+do
+  echo $i
+done
+
+var='hello world !'
+
+for i in $var
+do
+  echo $i
+done
+
+for i in `seq 10 20`
+do
+  echo $i
+done
+
+for i
+do
+  echo $i
+done
+
+for i in "$*"
+do
+  echo $i
+done
+
+for i in "$@"
+do
+  echo $i
+done

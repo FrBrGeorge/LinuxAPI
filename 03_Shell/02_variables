@@ -1,0 +1,6 @@
+#!/bin/sh
+
+VARIABLE_1=hello
+echo $VARIABLE_1 world $1
+echo "$*"
+echo $SHELL

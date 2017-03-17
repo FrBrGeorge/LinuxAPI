@@ -4,37 +4,52 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#define USE_PRINTF 0
+
 int main(int argc, char **argv)
 {
-	int fd; /* file descriptor */
-	pid_t pid; /* process identificator */
-	char *file = "numbers.txt";
-	char c;
+        int fd; /* file descriptor */
+        pid_t pid; /* process identificator */
+        char *file = "numbers.txt";
+        char c;
 
-	if (argc > 1)
-		file = argv[1];
+        if (argc > 1)
+                file = argv[1];
 
-	fd = open(file, O_RDONLY);
+        sleep(2);
+        write(1, "\n\n\n\n", 4);
 
-	if (fd == -1){
-		perror("open");
-		return 1;
-	}
+        pid = fork(); /* next steps will be run in 2 different processes */
 
-	pid = fork(); /* next steps will be run in 2 different processes */
+        if (pid == -1){
+                perror("fork");
+                return 1;
+        }
 
-	if (pid == -1){
-		perror("fork");
-		return 1;
-	}
+        fd = open(file, O_RDONLY);
 
-	while (read(fd, &c, 1) > 0)/* if read reaches end of file it returns 0 */
-	{
-		printf("%i: %c\n", pid, c);
-		usleep(1);
-	}
+        if (fd == -1){
+                perror("open");
+                return 1;
+        }
 
-	close(fd);
-	if(!pid) pause();
-	return 0;
+
+        while (read(fd, &c, 1) > 0)/* if read reaches end of file it returns 0 */
+        {
+                if (USE_PRINTF) {
+                        printf("%i: %c, ", pid, c);
+                } else {
+                        write(1, &c, 1);
+                }
+                usleep(1);
+        }
+
+        if (USE_PRINTF) {
+		printf("\n");
+        } else {
+        	write(1, "\n", 1);
+        }
+        close(fd);
+        if (pid) pause();
+        return 0;
 }

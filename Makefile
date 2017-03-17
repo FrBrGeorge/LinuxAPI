@@ -1,5 +1,13 @@
 LDFLAGS=-static
 
+all:	forkexec-all
+	@echo
+	@echo "	Images:"
+	@ls -m *.gz
+	@echo "	Use:"
+	@echo "./run image_name [init_binary]"
+	@echo
+
 %.root:	%.list allfiles
 	rm -rf "$@"
 	mkdir -p "$@"
@@ -13,22 +21,14 @@ shell:	shell.cpio.gz
 	@./show shell
 	@echo "./run shell <whatever>"
 
-forkexec:	forkexec-all
-	@echo
-	@echo "	Images:"
-	@ls -m *.gz
-	@echo "	Use:"
-	@echo "./run image_name [init_binary]"
-	@echo
-
-forkexec-all:	init-fs exec-fs fork-fs test-fs readfile-fs
-
 list:
 	for F in *.cpio.gz; do echo "	$$F:"; ./show $$F; done
 
-.PHONY: fork-fs exec-fs init-fs test-fs clean
+.PHONY: fork-fs exec-fs init-fs test-fs clean readfile-fs all clean
 
-fork-fs:	forkmess forkwait forkexec child forkenv childe fork.cpio.gz
+forkexec-all:	init-fs exec-fs fork-fs test-fs readfile-fs
+
+fork-fs:	forkmess forkexec forkwait child forkenv childe fork.cpio.gz
 
 exec-fs:	exec child exec.cpio.gz
 

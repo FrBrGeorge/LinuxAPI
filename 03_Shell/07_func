@@ -1,0 +1,10 @@
+#!/bin/bash
+
+func() {
+  echo $1 yey $2 
+}
+
+func
+func 1
+func 2 3
+func 4 5 6

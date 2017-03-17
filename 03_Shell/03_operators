@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if ls $1
+then
+  echo $?
+  echo 'OK'
+elif [ "$1" = 1 ]
+then
+  echo "odin"
+else
+  echo $?
+  echo 'FAIL'
+fi
