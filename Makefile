@@ -1,4 +1,4 @@
-LDFLAGS=-static
+LDFLAGS=-static -Os -s
 
 %.root:	%.list allfiles
 	rm -rf "$@"
@@ -17,12 +17,16 @@ run:	all
 	@echo "./run image_name [init_binary]"
 	@echo
 
-all:	init-fs exec-fs fork-fs test-fs readfile-fs
+all:	init-fs exec-fs fork-fs test-fs readfile-fs dopipe-fs objects-fs
 
 list:
 	for F in *.cpio.gz; do echo "	$$F:"; ./show $$F; done
 
-.PHONY: fork-fs exec-fs init-fs test-fs clean
+.PHONY: fork-fs exec-fs init-fs test-fs dopipe-fs clean
+
+objects-fs:	mkdir mount objects.cpio.gz
+
+dopipe-fs:	dopipe dopipe.cpio.gz
 
 fork-fs:	forkmess forkwait forkexec child forkenv childe fork.cpio.gz
 
