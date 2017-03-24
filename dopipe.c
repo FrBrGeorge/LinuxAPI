@@ -22,7 +22,6 @@ int main(void)
     close(0);
     sleep(1);
     dup(pipefd[0]);
-    close(pipefd[1]);
     execl("/usr/bin/rev", "rev", NULL);
   }
   close(pipefd[0]);
